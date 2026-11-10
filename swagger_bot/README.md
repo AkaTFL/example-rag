@@ -10,11 +10,25 @@ conclusion avec des métriques comparatives.
 
 ## Utilisation
 
-Depuis le dossier du projet, après avoir lancé l'API avec `python api.py` :
+## Prérequis et lancement
+
+L'API doit être ouverte et accessible avant de lancer le bot. Dans un premier
+terminal, démarre l'API depuis la racine du projet :
+
+```powershell
+python api.py
+```
+
+L'API doit rester active sur `http://127.0.0.1:8000`. Dans un deuxième
+terminal, lance ensuite le bot avec `bot.py` :
 
 ```powershell
 python swagger_bot\bot.py --timeout 180
 ```
+
+Le rapport PDF est généré uniquement après l'exécution du bot. Par défaut, il
+est créé à la racine du projet sous le nom `benchmark_report.pdf`. L'API doit
+donc rester ouverte pendant toute la durée du benchmark.
 
 Ou directement depuis le dossier `swagger_bot` :
 
