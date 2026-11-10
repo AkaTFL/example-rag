@@ -29,6 +29,7 @@ app = FastAPI(
 class AskRequest(BaseModel):
     question: str = Field(..., min_length=1, examples=["Comment s'appelle le cheval de Loran ?"])
     top_k: int = Field(config.TOP_K, ge=1, le=20, description="Nombre de passages à retrouver")
+    model: str | None = Field(None, min_length=1, description="Modèle Ollama à utiliser")
 
 
 class Source(BaseModel):
@@ -84,10 +85,15 @@ def ask(req: AskRequest):
         {"role": "user", "content": f"Extraits de l'histoire :\n\n{context}\n\nQuestion : {req.question}"},
     ]
     try:
-        answer = rag.chat(messages)
+        answer = rag.chat(messages, req.model)
     except Exception as exc:  # Ollama injoignable, modèle absent...
         raise HTTPException(502, f"Erreur Ollama : {exc}") from exc
-    return AskResponse(question=req.question, answer=answer.strip(), model=config.LLM_MODEL, sources=sources)
+    return AskResponse(
+        question=req.question,
+        answer=answer.strip(),
+        model=req.model or config.LLM_MODEL,
+        sources=sources,
+    )
 
 
 if __name__ == "__main__":
