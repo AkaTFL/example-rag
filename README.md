@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 ```bash
 ollama pull nomic-embed-text   # modèle d'embeddings
-ollama pull gemma4:e2b         # LLM (ou un autre, voir Configuration)
+ollama pull qwen2.5:1.5b         # LLM (ou un autre, voir Configuration)
 ```
 
 ## Utilisation
@@ -87,7 +87,7 @@ Corps de requête : `{"question": "Comment s'appelle le cheval de Léo ?", "top_
 
 | Variable      | Défaut              |
 |---------------|---------------------|
-| `LLM_MODEL`   | `gemma4:e2b`        |
+| `LLM_MODEL`   | `qwen2.5:1.5b`        |
 | `EMBED_MODEL` | `nomic-embed-text`  |
 | `OLLAMA_HOST` | `http://localhost:11434` |
 | `CHROMA_DIR`  | `./chroma_db`       |
